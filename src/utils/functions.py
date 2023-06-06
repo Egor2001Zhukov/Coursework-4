@@ -18,16 +18,17 @@ def continue_or_not(all_vacancies):
         user_interaction(all_vacancies)
         return True
     else:
+        print("Приходите снова")
         return True
 
 
 def salary(v):
-    if v["salary_from"] == v["salary_to"]:
+    if v["salary_from"] == 0 and v["salary_to"] == 0:
+        salary_ = 'не указана'
+    elif v["salary_from"] == v["salary_to"]:
         salary_ = f'{v["salary_from"]}'
     elif v["salary_from"] > 0 and v["salary_to"] > 0:
         salary_ = f'{v["salary_from"]} - {v["salary_to"]}'
-    elif v["salary_from"] == 0 and v["salary_to"] == 0:
-        salary_ = 'не указана'
     elif v["salary_from"] > 0:
         salary_ = f'от {v["salary_from"]}'
     elif v["salary_to"] > 0:
@@ -37,6 +38,7 @@ def salary(v):
 
 def print_all_vacancy(v):
     print(f'Название: {v["title"]}\n'
+          f'Ссылка на вакансию: {v["url"]}\n'
           f'Зарплата: {salary(v)}\n'
           f'Время публикации: {v["published_time"]}\n'
           f'Описание: {v["description"]}\n')
@@ -75,7 +77,7 @@ def user_interaction(all_vacancies):
         # Новый поиск
         elif inter == 0:
             exit_ = True
-            user_interaction(all_vacancies)
+            user_interaction(user_interaction_get_vacancies())
         # Со
         elif inter == 1:
             save_list = []
