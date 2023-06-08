@@ -4,6 +4,7 @@ from src.utils.saver import Saver
 
 
 def user_interaction(all_vacancies):
+    """Функция для работы с клиентами"""
     if not all_vacancies:
         try:
             cont = is_0_or_1(input("Вакансий с такими параметрами нет. Начать новый поиск?(нет(0),да(1))\n"))
@@ -58,6 +59,7 @@ def user_interaction(all_vacancies):
 
 
 def save_func(list_):
+    """Функция для сохранения вакансий"""
     try:
         save_to = is_0_or_1(input("В json(0) или csv(1)\n"))
         if save_to:
@@ -70,6 +72,7 @@ def save_func(list_):
 
 
 def continue_or_not(all_vacancies):
+    """Функция для работы с вакансиями, узнает у пользователя продолжить ли ему работу с собранными вакансиями"""
     try:
         cont = is_0_or_1(input("Продолжить работу с вакансиями?(нет(0),да(1))\n"))
         if cont:
@@ -84,6 +87,7 @@ def continue_or_not(all_vacancies):
 
 
 def salary_func(v):
+    """Функция, которая преобразовывает зарплату из вакансии для отображения"""
     salary_ = ""
     if v["salary_from"] == 0 and v["salary_to"] == 0:
         salary_ = 'не указана'
@@ -99,6 +103,7 @@ def salary_func(v):
 
 
 def print_all_vacancy(v):
+    """Функция, которая отображает полные данные о вакансии"""
     print(f'Название: {v["title"]}\n'
           f'Ссылка на вакансию: {v["url"]}\n'
           f'Зарплата: {salary_func(v)}\n'
@@ -107,6 +112,7 @@ def print_all_vacancy(v):
 
 
 def print_vacancy(list_of_vacancy):
+    """Функция, которая отображает краткую информацию о вакансии"""
     x = 1
     for v in list_of_vacancy:
         print(f'{x}: {v["title"]}, {salary_func(v)}, {v["published_time"]}')
@@ -114,6 +120,12 @@ def print_vacancy(list_of_vacancy):
 
 
 def get_vacancies():
+    """Функция, которая собирает вакансии по ключам
+    :param: text
+    :param: salary
+    :param: per_page
+    :param: sort_key
+    """
     text = input("Введите текст запроса\n")
     salary = 0
     per_page = 0
@@ -148,6 +160,7 @@ def get_vacancies():
 
 
 def compare_func(all_vacancies):
+    """Функция для сравнения вакансий"""
     try:
         compare = is_list_indexes(input("Для сравнения выберите 2 или более вакансий (введите цифры через запятую) \n"),
                                   len(all_vacancies))
@@ -170,6 +183,7 @@ def compare_func(all_vacancies):
 
 
 def save_in(all_vacancies):
+    """Функция для сохранения вакансий при работе с клиентом"""
     try:
         save_list = []
         save = is_list_indexes(input("Выберите вакансии для сохранения (введите цифру или цифры через запятую)\n"),
@@ -183,6 +197,7 @@ def save_in(all_vacancies):
 
 
 def show_vacancy(all_vacancies):
+    """Функция для отображения подробностей о вакансии при работе с клиентом"""
     try:
         number = is_any_pos_number_to(input("Какую вакансию нужно посмотреть?(введите номер вакансии)\n"),
                                       to=len(all_vacancies)+1)
