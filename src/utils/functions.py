@@ -165,7 +165,7 @@ def compare_func(all_vacancies):
         compare = is_list_indexes(input("Для сравнения выберите 2 или более вакансий (введите цифры через запятую) \n"),
                                   len(all_vacancies))
         compare_list = []
-        for x in compare.split(", "):
+        for x in compare:
             compare_list.append(all_vacancies[int(x) - 1])
         if len(compare_list) < 2:
             raise FewParamError
