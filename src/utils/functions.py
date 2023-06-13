@@ -33,7 +33,8 @@ def user_interaction(all_vacancies):
                 # Сохранение
                 elif inter == 2:
                     if len(all_vacancies) < 2:
-                        save_func(all_vacancies[0])
+                        save_func(all_vacancies)
+                        exit_ = continue_or_not(all_vacancies)
                     else:
                         save_in(all_vacancies)
                         exit_ = continue_or_not(all_vacancies)
@@ -48,6 +49,7 @@ def user_interaction(all_vacancies):
                 elif inter == 4:
                     if len(all_vacancies) < 2:
                         print_all_vacancy(all_vacancies[0])
+                        exit_ = continue_or_not(all_vacancies)
                     else:
                         show_vacancy(all_vacancies)
                         exit_ = continue_or_not(all_vacancies)
@@ -165,21 +167,21 @@ def compare_func(all_vacancies):
         compare = is_list_indexes(input("Для сравнения выберите 2 или более вакансий (введите цифры через запятую) \n"),
                                   len(all_vacancies))
         compare_list = []
-        for x in compare:
-            compare_list.append(all_vacancies[int(x) - 1])
-        if len(compare_list) < 2:
+        if len(compare) < 2:
             raise FewParamError
+        for x in compare:
+            compare_list.append(all_vacancies[x - 1])
         for v in compare_list:
             print_all_vacancy(v)
         save = int(input("Сохранить сравниваемые вакансии?(нет(0),да(1))\n"))
         if save:
-            save_in(compare_list)
+            save_func(compare_list)
     except FewParamError:
         print("Слишком мало значений")
         compare_func(all_vacancies)
     except ValueInputError:
-        print("Нужно ввести цифру или цифры через запятую (пример: 1, 2, 4)")
-        save_in(all_vacancies)
+        print("Нужно ввести цифры вакансий через запятую (пример: 1, 2, 4)")
+        compare_func(all_vacancies)
 
 
 def save_in(all_vacancies):
@@ -189,10 +191,10 @@ def save_in(all_vacancies):
         save = is_list_indexes(input("Выберите вакансии для сохранения (введите цифру или цифры через запятую)\n"),
                                len(all_vacancies))
         for x in save:
-            save_list.append(all_vacancies[int(x) - 1])
-        save_in(save_list)
+            save_list.append(all_vacancies[x - 1])
+        save_func(save_list)
     except ValueInputError:
-        print("Нужно ввести цифру или цифры через запятую (пример: 1, 2, 4)")
+        print("Нужно ввести цифру или цифры вакансий через запятую (пример: 1, 2, 4)")
         save_in(all_vacancies)
 
 

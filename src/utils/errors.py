@@ -45,12 +45,14 @@ def is_list_indexes(args: str, len_of_massive: int):
     list_return = []
     list_ = args.split(", ")
     for x in list_:
-        if not x.isdigit():
-            raise ValueInputError
-        elif 0 >= int(x) > len_of_massive:
-            raise ValueInputError
+        if x.isdigit():
+            x = int(x)
+            if 0 >= x or x > len_of_massive:
+                raise ValueInputError
+            else:
+                list_return.append(int(x))
         else:
-            list_return.append(x)
+            raise ValueInputError
     return list_return
 
 

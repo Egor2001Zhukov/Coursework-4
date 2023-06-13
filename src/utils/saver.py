@@ -15,7 +15,7 @@ class Saver:
     def save_in_csv(data, filename_for_save: str):
         path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         file = os.path.join(path, f"save_vacancy/{filename_for_save}.csv")
-        fieldnames = ['title', 'published_time', 'url', 'salary_from', 'salary_to', 'description', 'requirements']
+        fieldnames = ['title', 'published_time', 'url', 'salary_from', 'salary_to', 'description']
         with open(file, "w") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
